@@ -18,12 +18,16 @@ info:
     - Service Provider
     biolink-version: "3.1.1"
 servers:
-- description: Encrypted Production server
-  url: https://biothings.ncats.io/multiomics_ehr_risk_kp
-  x-maturity: production
-- description: Production server
-  url: http://biothings.ncats.io/multiomics_ehr_risk_kp
-  x-maturity: production
+  - x-maturity: production
+    url: https://biothings.ncats.io/multiomics_ehr_risk_kp
+    description: Encrypted Production server
+    description: ITRB Prod server
+  - x-maturity: testing
+    url: https://biothings.test.transltr.io/multiomics_ehr_risk_kp
+    description: ITRB Test server
+  - x-maturity: staging
+    url: https://biothings.ci.transltr.io/multiomics_ehr_risk_kp
+    description: ITRB CI server
 tags:
 - name: disease
 - name: chemical
