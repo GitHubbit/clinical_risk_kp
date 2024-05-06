@@ -5,13 +5,6 @@ import json
 import sys, os
 import numpy as np
 
-#!/usr/bin/env python3
-
-import pandas as pd
-import json
-import sys, os
-import numpy as np
-
 def parse_ehr_risk(data_folder):
 
     edges_filename = "ehr_risk_edges_data_2022_06_01.csv"
@@ -69,7 +62,7 @@ def parse_ehr_risk(data_folder):
     id_list = [] # use this to check if your document IDs are unique. Collect them and see if they're all unique
     
     # iterate through each row in KG to yield json formatted triple
-#     for index, row in kg[:2].iterrows(): # uncomment for testing  
+    # for index, row in kg[:2].iterrows(): # uncomment for testing  
     for index, row in kg.iterrows(): # comment for testing  
         id_dict = {} # this is the outter dict that holds inner dicts: subject_dict, association_dict, object_dict, and source_dict
         subject_dict = {} # inner dict
@@ -165,6 +158,19 @@ def parse_ehr_risk(data_folder):
                 "description": "A partnership with Providence/Swedish Health Services and Institute for Systems Biology allows analysis of 26 million EHRs from patients in seven states in the US, including Alaska, California, Montana, Oregon, Washington, Texas, and New Mexico. Please email data-access@isbscience.org for more information.",
             }
         )
+        
+        association_dict["edge_attributes"].append(
+            {
+                "attribute_type_id": "biolink:knowledge_level",
+                "value": "biolink:statistical_association"
+            }
+        )
+        association_dict["edge_attributes"].append(
+            {
+                "attribute_type_id": "biolink:agent_type",
+                "value": "biolink:computational_model"
+            }
+        )
 
         object_dict["{}".format(row["object"].split(':')[0])] = "{}".format(row["object"].split(':')[1]) # create the object dict from the rows of the df 
         object_dict["id"] = row["object"]
@@ -207,8 +213,8 @@ def parse_ehr_risk(data_folder):
                                                                          "None",
                                                                          "none",
                                                                          "NA"}}, "Error: All values including subject and object IDs, categories, names, p-value, AUC-ROC, and feature coefficient must be non-null and not contain string literal None or NONE"
-#             print(json.dumps(id_dict, indent=2)) # uncomment for testing
-#             print(index) # uncomment for testing
+            # print(json.dumps(id_dict, indent=2)) # uncomment for testing
+            # print(index) # uncomment for testing
             yield id_dict # comment for testing
         except AssertionError as msg:
             print(msg)
@@ -219,11 +225,9 @@ def parse_ehr_risk(data_folder):
 
 
 
-
 def main():
 	# data_folder = "../../data" # uncomment for testing
 	parse_ehr_risk(data_folder) 
 
 if __name__ == "__main__":
 	main()
-
