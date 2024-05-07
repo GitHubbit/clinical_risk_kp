@@ -161,8 +161,8 @@ def parse_ehr_risk(data_folder):
         
         association_dict["edge_attributes"].append(
             {
-                "attribute_type_id": "biolink:knowledge_type",
-                "value": "biolink:statistical_association"
+                "attribute_type_id": "biolink:agent_type",
+                "value": "biolink:computational_model"
             }
         )
         association_dict["edge_attributes"].append(
