@@ -158,11 +158,10 @@ def parse_ehr_risk(data_folder):
                 "description": "A partnership with Providence/Swedish Health Services and Institute for Systems Biology allows analysis of 26 million EHRs from patients in seven states in the US, including Alaska, California, Montana, Oregon, Washington, Texas, and New Mexico. Please email data-access@isbscience.org for more information.",
             }
         )
-        
-        association_dict["edge_attributes"].append(
+	association_dict["edge_attributes"].append(
             {
-                "attribute_type_id": "biolink:agent_type",
-                "value": "biolink:computational_model"
+                "attribute_type_id": "biolink:knowledge_level",
+                "value": "biolink:statistical_association"
             }
         )
         association_dict["edge_attributes"].append(
@@ -171,7 +170,6 @@ def parse_ehr_risk(data_folder):
                 "value": "biolink:computational_model"
             }
         )
-
         object_dict["{}".format(row["object"].split(':')[0])] = "{}".format(row["object"].split(':')[1]) # create the object dict from the rows of the df 
         object_dict["id"] = row["object"]
         object_dict["name"] = row["object_name"]
